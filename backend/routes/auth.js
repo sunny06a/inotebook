@@ -2,10 +2,11 @@ const express=require('express');
 const User=require('../models/User');
 const router=express.Router();
 const { body, validationResult } = require('express-validator');
-const bcrypt=require('bcryptjs');
+const bcrypt=require('bcryptjs'); //password hashing
+const jwt=require('jsonwebtoken')
 
 
-router.post('/',[
+router.post('/createuser',[
     //check for validation
     body('name').isLength({ min: 4 }).withMessage("min. 4 chracter"),
     body('email').isEmail().withMessage("enter valid email"),
@@ -32,7 +33,14 @@ router.post('/',[
             password:secPass    
         });
     }
-    res.send(user);
+    //for sign in web token
+    const data={
+        user:{
+            id:User.id
+        }
+    }
+    const auth_token=jwt.sign(data,'sunny123')
+    res.json({authtoken:auth_token});  
      } catch(error){
         console.error(error.message);
         res.json("some error occured");
