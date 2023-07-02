@@ -18,7 +18,7 @@ export default function Addnote() {
     return (
     <div className='container my-3'>
     <h1>Add a Note</h1>
-    <form>
+    <form className='my-3'>
 <div className="mb-3">
   <label htmlFor="title" className="form-label">Title</label>
   <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" onChange={onchange}/>
