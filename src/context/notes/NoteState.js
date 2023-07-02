@@ -74,7 +74,6 @@ const NoteState=(props)=>{
       },
       body:JSON.stringify({title,description,tag})
     });
-    const json= response.json();
     for(let index=0;index<notes.length;index++){
       const element=notes[index];
       if(element._id===id){
@@ -86,7 +85,16 @@ const NoteState=(props)=>{
   }
 
   //delete a note
-  const deleteNote=(id)=>{
+  const deleteNote=async (id)=>{
+   //api 
+   const response=await fetch(`${host}api/notes/deletenote/${id}`,{
+    method:'DELETE',
+    headers:{
+      'Content-Type':'application/json',
+      'auth_token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDFmNWFmMDdjMzNiNDYxOTI1MjMyIn0sImlhdCI6MTY4ODIxNTUyMn0.-vCx6CF-Ev2NRUCoJY2JO0e9kE-KfzJnEfqGRKTa3sA'
+    }
+  });
+    console.log(response.json())
     console.log("id ",id)
     const newNotes=notes.filter((note)=>{return note._id!==id})
     setNotes(newNotes)
