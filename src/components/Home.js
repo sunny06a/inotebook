@@ -1,9 +1,9 @@
 import React from 'react'
 import Notes from './Notes';
-export default function Home() {
+export default function Home(props) {
   return (
    <div>
-    <Notes></Notes>
+    <Notes showAlert={props.showAlert}></Notes>
     </div>
   )
 }

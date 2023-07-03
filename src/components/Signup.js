@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-export default function Signup() {
+export default function Signup(props) {
 
-  const [credentials,setCredentials]=useState({name:"",email:"",password:""})
+  const [credentials,setCredentials]=useState({name:"",email:"",password:"",confirmpassword:""})
   let navigate=useNavigate();
   const handleSubmit=async (e)=>{
       e.preventDefault();
@@ -19,10 +19,12 @@ export default function Signup() {
               //save the auth token and redirect
               localStorage.setItem('token',json.auth_token);
               navigate('/')
-              console.log("signed");
+              // console.log("signed");
+              props.showAlert("Account created successfully","success")
         }
         else{
-              alert("invalid credentials")
+              // alert("invalid credentials")
+              props.showAlert("invalid credentials","danger")
         }
   }
 
@@ -48,9 +50,9 @@ export default function Signup() {
   </div>
   <div className="mb-3">
     <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
-    <input type="password" className="form-control" id="confirm-password" value={credentials.password} name='confirm-password' onChange={onchange}/>
+    <input type="password" className="form-control" id="confirm-password"  value={credentials.confirmpassword}name='confirmpassword' onChange={onchange}/>
   </div>
-  <button type="submit" className="btn btn-primary" >Submit</button>
+  <button disabled={credentials.password===credentials.confirmpassowrd}type="submit" className="btn btn-primary" >Submit</button>
 </form>
 
     </>

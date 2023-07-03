@@ -2,7 +2,7 @@ import React, { useContext, useEffect,useRef,useState } from 'react'
 import noteContext from '../context/notes/NoteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
-export default function Notes() {
+export default function Notes(props) {
     const context=useContext(noteContext);
     const {notes,getNote,editNote}=context;
     const[note,setNote]=useState({id:'',etitle:' ',edescription:'',etag:'default'})
@@ -10,6 +10,7 @@ export default function Notes() {
       e.preventDefault();
       editNote(note.id,note.etitle,note.edescription,note.etag);
       refClose.current.click();
+      props.showAlert("Note updated successfully","success");  
       // addNote(note.title,note.description,note.tag);
   }
   const onchange=(e)=>{
@@ -20,13 +21,14 @@ export default function Notes() {
     },[])
     const updateNote=(note)=>{
       ref.current.click();
-      setNote({id:note._id,etitle:note.title,edescription:note.description,etag:note.tag})
+      setNote({id:note._id,etitle:note.title,edescription:note.description,etag:note.tag});
+      // props.showAlert("Note updated successfully","success");
     }
     const ref=useRef(null);
     const refClose=useRef(null);
   return (
     <>
-    <Addnote></Addnote>
+    <Addnote showAlert={props.showAlert}></Addnote>
 <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
@@ -67,7 +69,7 @@ export default function Notes() {
          {notes.length===0 && 'no notes to display'}
          </div>
       {notes.map((note)=>{
-        return <Noteitem key={note._id} note={note} updateNote={updateNote}></Noteitem>
+        return <Noteitem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert}></Noteitem>
     })}
     </div>
     </>

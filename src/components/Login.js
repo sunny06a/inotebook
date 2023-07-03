@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // import { useHistory } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Login(props) {
     const [credentials,setCredentials]=useState({email:"",password:""})
     let navigate=useNavigate();
     const handleSubmit=async (e)=>{
@@ -20,10 +20,12 @@ export default function Login() {
                 //save the auth token and redirect
                 localStorage.setItem('token',json.auth_token);
                 navigate('/')
-                console.log("logged in");
+                // console.log("logged in");
+                props.showAlert("Logged in successfully","success")
           }
           else{
-                alert("invalid credentials")
+                // alert("invalid credentials")
+                props.showAlert("invalid credentials","danger")
           }
     }
     
