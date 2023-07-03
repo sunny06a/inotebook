@@ -19,9 +19,10 @@ export default function Login(props) {
           if(json.auth_token){
                 //save the auth token and redirect
                 localStorage.setItem('token',json.auth_token);
-                navigate('/')
+                
                 // console.log("logged in");
                 props.showAlert("Logged in successfully","success")
+                navigate('/')
           }
           else{
                 // alert("invalid credentials")

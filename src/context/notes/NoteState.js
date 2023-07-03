@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NoteContext from './NoteContext';
-import { json } from 'react-router-dom';
+// import { json } from 'react-router-dom';
 
 const NoteState=(props)=>{
   const host="http://localhost:5000/"
@@ -32,7 +32,7 @@ const NoteState=(props)=>{
       method:'GET',
       headers:{
         'Content-Type': 'application/json',
-'auth_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDFmNWFmMDdjMzNiNDYxOTI1MjMyIn0sImlhdCI6MTY4ODIxNTUyMn0.-vCx6CF-Ev2NRUCoJY2JO0e9kE-KfzJnEfqGRKTa3sA'
+'auth_token': localStorage.getItem('token')
       }
       });
       const json= await response.json();
@@ -47,7 +47,7 @@ const NoteState=(props)=>{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'auth_token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDFmNWFmMDdjMzNiNDYxOTI1MjMyIn0sImlhdCI6MTY4ODIxNTUyMn0.-vCx6CF-Ev2NRUCoJY2JO0e9kE-KfzJnEfqGRKTa3sA'
+        'auth_token':localStorage.getItem('token')
       },
       body:JSON.stringify({title,description,tag})
     });
@@ -62,7 +62,7 @@ const NoteState=(props)=>{
       method:'PUT',
       headers:{
         'Content-Type':'application/json',
-        'auth_token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDFmNWFmMDdjMzNiNDYxOTI1MjMyIn0sImlhdCI6MTY4ODIxNTUyMn0.-vCx6CF-Ev2NRUCoJY2JO0e9kE-KfzJnEfqGRKTa3sA'
+        'auth_token':localStorage.getItem('token')
       },
       body:JSON.stringify({title,description,tag})
     });
@@ -76,7 +76,8 @@ const NoteState=(props)=>{
         break;
       }
     }
-    setNotes(newnotes)
+    setNotes(newnotes);
+    console.log(response);
   }
 
   //delete a note
@@ -86,12 +87,12 @@ const NoteState=(props)=>{
     method:'DELETE',
     headers:{
       'Content-Type':'application/json',
-      'auth_token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMDFmNWFmMDdjMzNiNDYxOTI1MjMyIn0sImlhdCI6MTY4ODIxNTUyMn0.-vCx6CF-Ev2NRUCoJY2JO0e9kE-KfzJnEfqGRKTa3sA'
+      'auth_token':localStorage.getItem('token')
     }
   });
 
   const json=await response.json()
-    // console.log(response.json())
+    console.log(json)
     console.log("id ",id)
     const newNotes=notes.filter((note)=>{return note._id!==id})
     setNotes(newNotes)

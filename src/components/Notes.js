@@ -2,8 +2,10 @@ import React, { useContext, useEffect,useRef,useState } from 'react'
 import noteContext from '../context/notes/NoteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
+import { useNavigate } from 'react-router-dom';
 export default function Notes(props) {
     const context=useContext(noteContext);
+    let navigate=useNavigate();
     const {notes,getNote,editNote}=context;
     const[note,setNote]=useState({id:'',etitle:' ',edescription:'',etag:'default'})
     const handleClick=(e)=>{
@@ -17,7 +19,14 @@ export default function Notes(props) {
       setNote({...note,[e.target.name]:e.target.value})
   }
     useEffect(()=>{
+      if(localStorage.getItem('token')){
       getNote()
+    }
+      else{
+        props.showAlert("You are not logged in","danger");
+        navigate('/login');
+      }
+      // eslint-disable-next-line
     },[])
     const updateNote=(note)=>{
       ref.current.click();
