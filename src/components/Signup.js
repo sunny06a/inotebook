@@ -33,28 +33,33 @@ export default function Signup(props) {
 }
   return (
     <>
+    <div className='container col-md-6 p-5' style={{border:"2px solid black",borderRadius:"10px"}}>
+    <h1 className="my-3"><i class="fa-solid fa-user"></i> Create an account</h1>  
     <form onSubmit={handleSubmit}>
   <div className="mb-3">
     <label htmlFor="name" className="form-label">Name</label>
-    <input type="text" className="form-control" id="name" name="name" value={credentials.name}aria-describedby="emailHelp" onChange={onchange}/>
-    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+    <input type="text" className="form-control" id="name" name="name" value={credentials.name} onChange={onchange} required/>
   </div>
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="email" name="email" value={credentials.email}aria-describedby="emailHelp" onChange={onchange}/>
+    <input type="email" className="form-control" id="email" name="email" value={credentials.email} aria-describedby="emailHelp" onChange={onchange}/>
     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" className="form-control" id="password" value={credentials.password}name='password' onChange={onchange}/>
+    <input type="password" className="form-control" id="password" value={credentials.password}name='password' onChange={onchange} aria-describedby="passHelp" required/>
+    <div id="passHelp" className="form-text">Min. 8 characters</div>
+ 
   </div>
   <div className="mb-3">
     <label htmlFor="confirm-password" className="form-label">Confirm Password</label>
-    <input type="password" className="form-control" id="confirm-password"  value={credentials.confirmpassword}name='confirmpassword' onChange={onchange}/>
+    <input type="password" className="form-control" id="confirm-password"  value={credentials.confirmpassword} aria-describedby="cpassHelp" name='confirmpassword' onChange={onchange}/>
+    <div id="cpassHelp" className="form-text">Enter same password to enable button</div>
+ 
   </div>
-  <button disabled={credentials.password===credentials.confirmpassowrd}type="submit" className="btn btn-primary" >Submit</button>
+  <button disabled={credentials.password===credentials.confirmpassword}type="submit" className="btn btn-primary" >Submit</button>
 </form>
-
+</div>
     </>
   )
 }

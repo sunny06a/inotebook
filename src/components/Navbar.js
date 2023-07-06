@@ -11,7 +11,7 @@ export default function Navbar() {
   let location=useLocation();
   return (
     <div>
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar navbar-expand-lg navbar bg-primary">
   <div className="container-fluid">
     <Link className="navbar-brand" to="/">iNotebook</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,10 @@ export default function Navbar() {
         <li className="nav-item">
           <Link className={`nav-link ${location.pathname==="/"?"active":" "}`} aria-current="page" to="/">Home</Link>
         </li>
+        <li className="nav-item">
+          <Link className={`nav-link ${location.pathname==="/"?"profile":" "}`} aria-current="page" to="/profile">Profile</Link>
+        </li>
+        
         <li className="nav-item">
           <Link className={`nav-link ${location.pathname==="/about"?"active":" "}`} to="/about">About</Link>
         </li>

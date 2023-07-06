@@ -35,18 +35,21 @@ export default function Login(props) {
 }
   return (
  <>
+ <div className="container p-5 col-md-6 my-3 " style={{border:"2px solid black",borderRadius:"10px"}}>
+  <h1 className="my-3"><i class="fa-solid fa-user"></i> Login to continue</h1>
  <form onSubmit={handleSubmit}>
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="email" name="email" value={credentials.email}aria-describedby="emailHelp" onChange={onchange}/>
+    <input type="email" className="form-control" id="email" name="email" value={credentials.email}aria-describedby="emailHelp" required onChange={onchange}/>
     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" className="form-control" id="password" value={credentials.password}name='password' onChange={onchange}/>
+    <input type="password" className="form-control" id="password" value={credentials.password}name='password' onChange={onchange} required/>
   </div>
   <button type="submit" className="btn btn-primary" >Submit</button>
 </form>
+</div>
  </>
   )
 }
