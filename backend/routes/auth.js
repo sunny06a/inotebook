@@ -94,7 +94,7 @@ router.post("/login",
 );
 
 //route 3 get login details of user
-router.post("/getuser", fetchUser,async (req, res) => {
+router.get("/getuser", fetchUser,async (req, res) => {
   try {
     const user_id=req.user;
     //console.log(user_id)
